@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+
+    <div class="container">
+
+        <span class="navbar-brand">
+
+            Smart Expense Tracker
+
+        </span>
+
+        <form th:action="@{/logout}" method="post">
+
+            <button class="btn btn-danger">
+
+                Logout
+
+            </button>
+
+        </form>
+
+    </div>
+
+</nav>
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body text-center">
+
+            <h2>
+
+                Welcome to Smart Expense Tracker 🎉
+
+            </h2>
+
+            <p>
+
+                Login Successful.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
