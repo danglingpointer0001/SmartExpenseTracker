@@ -52,6 +52,6 @@ public class AuthController {
 
     @GetMapping("/dashboard")
     public String dashboard() {
-        return "dashboard";
+        return "redirect:/expenses";
     }
 }
