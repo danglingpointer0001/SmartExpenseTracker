@@ -4,6 +4,7 @@ import com.exp.smartexpensetracker.entity.Expense;
 import com.exp.smartexpensetracker.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -32,4 +33,20 @@ public class ExpenseService {
     public Expense updateExpense(Expense expense) {
         return expenseRepository.save(expense);
     }
+    public Double getTotalExpense() {
+        return expenseRepository.getTotalExpense();
+    }
+
+    public Double getHighestExpense() {
+        return expenseRepository.getHighestExpense();
+    }
+
+    public Double getLowestExpense() {
+        return expenseRepository.getLowestExpense();
+    }
+
+    public long getTotalTransactions() {
+        return expenseRepository.count();
+    }
+
 }

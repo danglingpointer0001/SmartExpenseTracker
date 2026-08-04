@@ -6,38 +6,340 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
           rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+
+        body{
+            background:#f4f6f9;
+        }
+
+        .card{
+            border:none;
+            border-radius:18px;
+            transition:.3s;
+        }
+
+        .card:hover{
+
+            transform:translateY(-4px);
+
+            box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+        }
+
+        .stat-card h6{
+
+            font-weight:600;
+
+            opacity:.9;
+
+        }
+
+        .stat-card h3{
+
+            font-size:32px;
+
+            font-weight:bold;
+
+        }
+
+        .table{
+
+            vertical-align:middle;
+
+        }
+
+        .btn{
+
+            border-radius:10px;
+
+        }
+
+        .form-control,
+        .form-select{
+
+            border-radius:10px;
+
+        }
+
+        .table thead{
+
+            background:#212529;
+
+            color:white;
+
+        }
+
+        .badge{
+
+            font-size:.85rem;
+
+            padding:8px 12px;
+
+        }
+
+        .footer{
+
+            color:gray;
+
+            text-align:center;
+
+            padding:30px;
+
+        }
+
+    </style>
 
 </head>
 
 <body class="bg-light">
 
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
 
     <div class="container">
 
-        <span class="navbar-brand">
+        <a class="navbar-brand fw-bold fs-4" href="/expenses">
+
+            <i class="bi bi-wallet2 text-warning"></i>
+
             Smart Expense Tracker
-        </span>
 
-        <form th:action="@{/logout}" method="post">
+        </a>
 
-            <button class="btn btn-danger">
-                Logout
-            </button>
+        <div class="ms-auto">
 
-        </form>
+            <form th:action="@{/logout}" method="post">
+
+                <button class="btn btn-outline-light">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        </div>
 
     </div>
 
 </nav>
-
 <div class="container mt-4">
+
+<div class="row g-4 mb-4">
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card stat-card bg-primary text-white shadow">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h6>Total Expense</h6>
+
+                        <h3>
+
+                            ₹ <span th:text="${totalExpense}"></span>
+
+                        </h3>
+
+                    </div>
+
+                    <i class="bi bi-cash-stack display-5"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card stat-card bg-success text-white shadow">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h6>Total Transactions</h6>
+
+                        <h3 th:text="${totalTransactions}"></h3>
+
+                    </div>
+
+                    <i class="bi bi-receipt display-5"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card stat-card bg-warning text-dark shadow">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h6>Highest Expense</h6>
+
+                        <h3>
+
+                            ₹ <span th:text="${highestExpense}"></span>
+
+                        </h3>
+
+                    </div>
+
+                    <i class="bi bi-graph-up-arrow display-5"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card stat-card bg-danger text-white shadow">
+
+            <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h6>Lowest Expense</h6>
+
+                        <h3>
+
+                            ₹ <span th:text="${lowestExpense}"></span>
+
+                        </h3>
+
+                    </div>
+
+                    <i class="bi bi-graph-down-arrow display-5"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- Search & Filter Section -->
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-body">
+
+        <div class="row g-3 align-items-end">
+
+            <div class="col-lg-4">
+
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-search"></i>
+                    Search
+                </label>
+
+                <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search by title...">
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-tags"></i>
+                    Category
+                </label>
+
+                <select class="form-select">
+
+                    <option>All Categories</option>
+                    <option>Food</option>
+                    <option>Travel</option>
+                    <option>Shopping</option>
+                    <option>Entertainment</option>
+                    <option>Bills</option>
+                    <option>Health</option>
+                    <option>Education</option>
+                    <option>Others</option>
+
+                </select>
+            </div>
+
+            <div class="col-lg-3">
+
+                <label class="form-label fw-semibold">
+                    <i class="bi bi-calendar-event"></i>
+                    Date
+                </label>
+
+                <input
+                        type="date"
+                        class="form-control">
+
+            </div>
+
+            <div class="col-lg-2 d-grid">
+
+                <button class="btn btn-outline-secondary">
+
+                    <i class="bi bi-arrow-clockwise"></i>
+
+                    Reset
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- Add Expense Card -->
 
     <div class="card shadow mb-4">
 
-        <div class="card-header">
+        <div class="card-header bg-success text-white">
 
-            <h4>Add Expense</h4>
+            <h4 class="mb-0">
+
+                <i class="bi bi-plus-circle"></i>
+
+                Add Expense
+
+            </h4>
 
         </div>
 
@@ -46,64 +348,63 @@
             <form th:action="@{/expenses}"
                   th:object="${expense}"
                   method="post">
+
                 <input type="hidden" th:field="*{id}">
 
                 <div class="row">
 
                     <div class="col-md-3">
-
-                        <input
-                                class="form-control"
-                                type="text"
-                                th:field="*{title}"
-                                placeholder="Title"
-                                required>
-
+                        <input class="form-control"
+                               type="text"
+                               th:field="*{title}"
+                               placeholder="Title"
+                               required>
                     </div>
 
                     <div class="col-md-3">
-
-                        <input
-                                class="form-control"
-                                type="text"
+                        <select class="form-select"
                                 th:field="*{category}"
-                                placeholder="Category"
                                 required>
 
+                            <option value="">Select Category</option>
+
+                            <option value="Food">🍔 Food</option>
+                            <option value="Travel">🚕 Travel</option>
+                            <option value="Shopping">🛍 Shopping</option>
+                            <option value="Entertainment">🎬 Entertainment</option>
+                            <option value="Bills">💡 Bills</option>
+                            <option value="Health">❤️ Health</option>
+                            <option value="Education">📚 Education</option>
+                            <option value="Others">📦 Others</option>
+
+                        </select>
                     </div>
 
                     <div class="col-md-2">
-
-                        <input
-                                class="form-control"
-                                type="number"
-                                step="0.01"
-                                th:field="*{amount}"
-                                placeholder="Amount"
-                                required>
-
+                        <input class="form-control"
+                               type="number"
+                               step="0.01"
+                               th:field="*{amount}"
+                               placeholder="Amount"
+                               required>
                     </div>
 
                     <div class="col-md-2">
-
-                        <input
-                                class="form-control"
-                                type="date"
-                                th:field="*{expenseDate}"
-                                required>
-
+                        <input class="form-control"
+                               type="date"
+                               th:field="*{expenseDate}"
+                               required>
                     </div>
 
                     <div class="col-md-2">
-
-                        <button
-                                class="btn btn-primary w-100"
+                        <button class="btn btn-success w-100"
                                 type="submit">
 
-                            Save
+                            <i class="bi bi-check-circle"></i>
+
+                            Save Expense
 
                         </button>
-
                     </div>
 
                 </div>
@@ -114,22 +415,31 @@
 
     </div>
 
+    <!-- Expense Table -->
+
     <div class="card shadow">
 
-        <div class="card-header">
+        <div class="card-header bg-dark text-white">
 
-            <h4>All Expenses</h4>
+            <h4 class="mb-0">
+
+                <i class="bi bi-table"></i>
+
+                All Expenses
+
+            </h4>
 
         </div>
 
         <div class="card-body">
 
-            <table class="table table-striped">
+            <table class="table table-hover table-bordered align-middle">
 
                 <thead>
 
                 <tr>
 
+                    <th>#</th>
                     <th>Title</th>
                     <th>Category</th>
                     <th>Amount</th>
@@ -142,22 +452,39 @@
 
                 <tbody>
 
-                <tr th:each="expense : ${expenses}">
-
+                <tr th:each="expense, stat : ${expenses}">
+                    <td th:text="${stat.count}"></td>
                     <td th:text="${expense.title}"></td>
-                    <td th:text="${expense.category}"></td>
-                    <td th:text="${expense.amount}"></td>
-                    <td th:text="${expense.expenseDate}"></td>
                     <td>
+
+    <span class="badge bg-primary"
+          th:text="${expense.category}">
+    </span>
+
+                    </td>
+                    <td>
+
+                        ₹ <span th:text="${expense.amount}"></span>
+
+                    </td>
+                    <td th:text="${expense.expenseDate}"></td>
+
+                    <td>
+
                         <a class="btn btn-warning btn-sm"
                            th:href="@{/expenses/edit/{id}(id=${expense.id})}">
+
+                            <i class="bi bi-pencil-square"></i>
 
                             Edit
 
                         </a>
 
                         <a class="btn btn-danger btn-sm"
+                           onclick="return confirm('Delete this expense?')"
                            th:href="@{/expenses/delete/{id}(id=${expense.id})}">
+
+                            <i class="bi bi-trash"></i>
 
                             Delete
 

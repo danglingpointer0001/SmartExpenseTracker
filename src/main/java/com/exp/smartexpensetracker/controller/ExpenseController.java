@@ -20,6 +20,17 @@ public class ExpenseController {
 
         model.addAttribute("expense", new Expense());
         model.addAttribute("expenses", expenseService.getAllExpenses());
+        model.addAttribute("totalExpense",
+                expenseService.getTotalExpense());
+
+        model.addAttribute("highestExpense",
+                expenseService.getHighestExpense());
+
+        model.addAttribute("lowestExpense",
+                expenseService.getLowestExpense());
+
+        model.addAttribute("totalTransactions",
+                expenseService.getTotalTransactions());
 
         return "expenses";
     }
