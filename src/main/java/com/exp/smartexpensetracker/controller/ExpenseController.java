@@ -5,6 +5,8 @@ import com.exp.smartexpensetracker.service.ExpenseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class ExpenseController {
@@ -16,21 +18,41 @@ public class ExpenseController {
     }
 
     @GetMapping("/expenses")
-    public String expensePage(Model model) {
+    public String expensePage(
+
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) LocalDate date,
+            Model model) {
 
         model.addAttribute("expense", new Expense());
-        model.addAttribute("expenses", expenseService.getAllExpenses());
-        model.addAttribute("totalExpense",
-                expenseService.getTotalExpense());
 
-        model.addAttribute("highestExpense",
-                expenseService.getHighestExpense());
+        List<Expense> expenses;
 
-        model.addAttribute("lowestExpense",
-                expenseService.getLowestExpense());
+        if (keyword != null && !keyword.isBlank()) {
 
-        model.addAttribute("totalTransactions",
-                expenseService.getTotalTransactions());
+            expenses = expenseService.searchByTitle(keyword);
+
+        } else if (category != null && !category.isBlank()) {
+
+            expenses = expenseService.filterByCategory(category);
+
+        } else if (date != null) {
+
+            expenses = expenseService.filterByDate(date);
+
+        } else {
+
+            expenses = expenseService.getAllExpenses();
+
+        }
+
+        model.addAttribute("expenses", expenses);
+
+        model.addAttribute("totalExpense", expenseService.getTotalExpense());
+        model.addAttribute("highestExpense", expenseService.getHighestExpense());
+        model.addAttribute("lowestExpense", expenseService.getLowestExpense());
+        model.addAttribute("totalTransactions", expenseService.getTotalTransactions());
 
         return "expenses";
     }

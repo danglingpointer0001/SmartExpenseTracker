@@ -259,7 +259,9 @@
 
     <div class="card-body">
 
-        <div class="row g-3 align-items-end">
+        <form th:action="@{/expenses}" method="get">
+
+            <div class="row g-3 align-items-end">
 
             <div class="col-lg-4">
 
@@ -271,6 +273,7 @@
                 <input
                         type="text"
                         class="form-control"
+                        name="keyword"
                         placeholder="Search by title...">
 
             </div>
@@ -282,7 +285,7 @@
                     Category
                 </label>
 
-                <select class="form-select">
+                <select class="form-select" name="category">
 
                     <option>All Categories</option>
                     <option>Food</option>
@@ -306,21 +309,23 @@
 
                 <input
                         type="date"
-                        class="form-control">
+                        class="form-control"
+                        name="date">
 
             </div>
 
             <div class="col-lg-2 d-grid">
 
-                <button class="btn btn-outline-secondary">
+                <button class="btn btn-primary">
 
-                    <i class="bi bi-arrow-clockwise"></i>
+                    <i class="bi bi-search"></i>
 
-                    Reset
+                    Search
 
                 </button>
 
             </div>
+            </form>
 
         </div>
 

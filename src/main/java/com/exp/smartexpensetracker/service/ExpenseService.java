@@ -23,9 +23,11 @@ public class ExpenseService {
     public List<Expense> getAllExpenses() {
         return expenseRepository.findAll();
     }
+
     public void deleteExpense(Long id) {
         expenseRepository.deleteById(id);
     }
+
     public Expense getExpenseById(Long id) {
         return expenseRepository.findById(id).orElse(null);
     }
@@ -33,6 +35,7 @@ public class ExpenseService {
     public Expense updateExpense(Expense expense) {
         return expenseRepository.save(expense);
     }
+
     public Double getTotalExpense() {
         return expenseRepository.getTotalExpense();
     }
@@ -48,5 +51,15 @@ public class ExpenseService {
     public long getTotalTransactions() {
         return expenseRepository.count();
     }
+    public List<Expense> searchByTitle(String title) {
+        return expenseRepository.findByTitleContainingIgnoreCase(title);
+    }
 
+    public List<Expense> filterByCategory(String category) {
+        return expenseRepository.findByCategory(category);
+    }
+
+    public List<Expense> filterByDate(LocalDate date) {
+        return expenseRepository.findByExpenseDate(date);
+    }
 }
