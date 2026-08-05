@@ -364,12 +364,20 @@
                                th:field="*{title}"
                                placeholder="Title"
                                required>
+                        <div class="text-danger"
+                             th:if="${#fields.hasErrors('title')}"
+                             th:errors="*{title}">
+                        </div>
                     </div>
 
                     <div class="col-md-3">
                         <select class="form-select"
                                 th:field="*{category}"
                                 required>
+                            <div class="text-danger"
+                                 th:if="${#fields.hasErrors('category')}"
+                                 th:errors="*{category}">
+                            </div>
 
                             <option value="">Select Category</option>
 
@@ -392,6 +400,10 @@
                                th:field="*{amount}"
                                placeholder="Amount"
                                required>
+                        <div class="text-danger"
+                             th:if="${#fields.hasErrors('amount')}"
+                             th:errors="*{amount}">
+                        </div>
                     </div>
 
                     <div class="col-md-2">
@@ -399,6 +411,10 @@
                                type="date"
                                th:field="*{expenseDate}"
                                required>
+                        <div class="text-danger"
+                             th:if="${#fields.hasErrors('expenseDate')}"
+                             th:errors="*{expenseDate}">
+                        </div>
                     </div>
 
                     <div class="col-md-2">
@@ -419,6 +435,14 @@
         </div>
 
     </div>
+<a th:href="@{/expenses/export/csv}"
+   class="btn btn-success">
+
+    <i class="bi bi-file-earmark-spreadsheet"></i>
+
+    Export CSV
+
+</a>
 
     <!-- Expense Table -->
 

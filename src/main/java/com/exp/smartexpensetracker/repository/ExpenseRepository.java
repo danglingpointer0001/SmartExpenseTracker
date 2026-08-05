@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDate;
 import java.util.List;
+import com.exp.smartexpensetracker.entity.User;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
@@ -23,4 +24,11 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     List<Expense> findByCategory(String category);
 
     List<Expense> findByExpenseDate(LocalDate date);
+    List<Expense> findByUser(User user);
+
+    List<Expense> findByUserAndTitleContainingIgnoreCase(User user, String title);
+
+    List<Expense> findByUserAndCategory(User user, String category);
+
+    List<Expense> findByUserAndExpenseDate(User user, LocalDate date);
 }

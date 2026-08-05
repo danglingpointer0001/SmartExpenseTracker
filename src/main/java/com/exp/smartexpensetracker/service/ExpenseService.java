@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import com.exp.smartexpensetracker.entity.User;
 
 @Service
 public class ExpenseService {
@@ -61,5 +62,20 @@ public class ExpenseService {
 
     public List<Expense> filterByDate(LocalDate date) {
         return expenseRepository.findByExpenseDate(date);
+    }
+    public List<Expense> getExpensesByUser(User user) {
+        return expenseRepository.findByUser(user);
+    }
+
+    public List<Expense> searchByTitle(User user, String title) {
+        return expenseRepository.findByUserAndTitleContainingIgnoreCase(user, title);
+    }
+
+    public List<Expense> filterByCategory(User user, String category) {
+        return expenseRepository.findByUserAndCategory(user, category);
+    }
+
+    public List<Expense> filterByDate(User user, LocalDate date) {
+        return expenseRepository.findByUserAndExpenseDate(user, date);
     }
 }

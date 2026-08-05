@@ -3,6 +3,11 @@ package com.exp.smartexpensetracker.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "expenses")
@@ -12,17 +17,26 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title is required")
     @Column(nullable = false)
     private String title;
 
+    @NotBlank(message = "Category is required")
     @Column(nullable = false)
     private String category;
 
+    @NotNull(message = "Amount is required")
+    @Positive(message = "Amount must be greater than 0")
     @Column(nullable = false)
     private Double amount;
 
+    @NotNull(message = "Expense date is required")
     @Column(nullable = false)
     private LocalDate expenseDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Expense() {
     }
@@ -61,5 +75,12 @@ public class Expense {
 
     public void setExpenseDate(LocalDate expenseDate) {
         this.expenseDate = expenseDate;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
